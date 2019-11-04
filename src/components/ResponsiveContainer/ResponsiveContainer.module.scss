@@ -1,0 +1,18 @@
+.container {
+    width: calc(100% - 2rem);
+    &.center {
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 800px) {
+    .container {
+        max-width: 700px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .container {
+        max-width: 1000px;
+    }
+}

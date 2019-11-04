@@ -1,0 +1,36 @@
+.form {
+    width: 100%;
+    display: flex;
+    margin: 0.75rem 0;
+    // padding: 1rem;
+
+    &:hover input,
+    & input:focus-within {
+        box-shadow: 0 1px 5px 0px #999;
+    }
+    .nameInput {
+        flex-grow: 1;
+        padding: 0.5rem;
+        font-size: 1.25rem;
+        outline: none;
+        border: none;
+        box-shadow: none;
+
+        &:focus-within {
+            // background: red;
+        }
+    }
+
+    button[type='submit'] {
+        border: none;
+        background-color: green;
+        padding: 0 1rem;
+        color: white;
+        font-size: 1.25rem;
+        transition: box-shadow 0.15s;
+        &:hover {
+            cursor: pointer;
+            // box-shadow: 0 1px 5px 0px #999;
+        }
+    }
+}
