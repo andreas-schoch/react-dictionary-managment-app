@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.95e14b21.chunk.css",
-    "main.js": "/static/js/main.364f0b52.chunk.js",
-    "main.js.map": "/static/js/main.364f0b52.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.ac482a97.js",
-    "runtime-main.js.map": "/static/js/runtime-main.ac482a97.js.map",
-    "static/js/2.b8173159.chunk.js": "/static/js/2.b8173159.chunk.js",
-    "static/js/2.b8173159.chunk.js.map": "/static/js/2.b8173159.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.971f4b561c14ad4a8f505b7444c02c02.js": "/precache-manifest.971f4b561c14ad4a8f505b7444c02c02.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.95e14b21.chunk.css.map": "/static/css/main.95e14b21.chunk.css.map"
+    "main.css": "/react-dictionarymanagement-app/static/css/main.95e14b21.chunk.css",
+    "main.js": "/react-dictionarymanagement-app/static/js/main.610c16a3.chunk.js",
+    "main.js.map": "/react-dictionarymanagement-app/static/js/main.610c16a3.chunk.js.map",
+    "runtime-main.js": "/react-dictionarymanagement-app/static/js/runtime-main.d151166d.js",
+    "runtime-main.js.map": "/react-dictionarymanagement-app/static/js/runtime-main.d151166d.js.map",
+    "static/js/2.b8173159.chunk.js": "/react-dictionarymanagement-app/static/js/2.b8173159.chunk.js",
+    "static/js/2.b8173159.chunk.js.map": "/react-dictionarymanagement-app/static/js/2.b8173159.chunk.js.map",
+    "index.html": "/react-dictionarymanagement-app/index.html",
+    "precache-manifest.b287ee7d90b22115961601aab8e72572.js": "/react-dictionarymanagement-app/precache-manifest.b287ee7d90b22115961601aab8e72572.js",
+    "service-worker.js": "/react-dictionarymanagement-app/service-worker.js",
+    "static/css/main.95e14b21.chunk.css.map": "/react-dictionarymanagement-app/static/css/main.95e14b21.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.ac482a97.js",
+    "static/js/runtime-main.d151166d.js",
     "static/js/2.b8173159.chunk.js",
     "static/css/main.95e14b21.chunk.css",
-    "static/js/main.364f0b52.chunk.js"
+    "static/js/main.610c16a3.chunk.js"
   ]
 }
