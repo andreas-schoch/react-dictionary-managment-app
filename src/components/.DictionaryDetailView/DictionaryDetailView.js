@@ -9,7 +9,7 @@ import ResponsiveContainer from '../ResponsiveContainer/ResponsiveContainer.js';
 
 const DictionaryDetailView = ({ currentDictionary, history }) => {
     useEffect(() => {
-        // redirect to homepage if currentDict invalid
+        // redirect to homepage if currentDictionary invalid
         if (!currentDictionary) {
             history.push('/');
         }

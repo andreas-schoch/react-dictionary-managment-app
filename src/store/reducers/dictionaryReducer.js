@@ -37,8 +37,8 @@ const initial = {
 };
 
 // look for data in localStorage
-const persistedState = localStorage.getItem('reduxState')
-    ? JSON.parse(localStorage.getItem('reduxState')).dictionaries
+const persistedState = localStorage.getItem('dictApp')
+    ? JSON.parse(localStorage.getItem('dictApp')).dictionaries
     : initial;
 
 export const dictionaryReducer = (dictionaries = persistedState, action) => {

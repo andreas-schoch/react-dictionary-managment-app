@@ -3,6 +3,7 @@
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
 }
+
 .meta {
     font-weight: lighter;
     .mdot {
@@ -44,5 +45,6 @@
 
     &.btnValidate {
         margin-left: auto;
+        visibility: hidden; // TODO implement validation outside detail view
     }
 }

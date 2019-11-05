@@ -3,9 +3,7 @@ import * as actionTypes from '../actions/types';
 const initial = {};
 
 // look for data in localStorage
-const persistedState = localStorage.getItem('reduxState')
-    ? JSON.parse(localStorage.getItem('reduxState')).entries
-    : initial;
+const persistedState = localStorage.getItem('dictApp') ? JSON.parse(localStorage.getItem('dictApp')).entries : initial;
 
 export const entryReducer = (entries = persistedState, action) => {
     switch (action.type) {

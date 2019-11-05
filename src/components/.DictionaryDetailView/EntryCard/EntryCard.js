@@ -26,7 +26,6 @@ const EntryCard = ({
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        console.log('submit entry update');
     };
 
     const handleChange = evt => {
@@ -34,13 +33,10 @@ const EntryCard = ({
         const { name, value } = evt.target;
         if ((value !== domain && name === 'domain') || (value !== range && name === 'range')) {
             setEntryModified(true);
-            console.log('entry modified');
         }
     };
 
-    const handleFocus = evt => {
-        console.log('focus');
-    };
+    // const handleFocus = evt => {};
 
     const handleBlur = evt => {
         // update redux state when input loses focus
@@ -50,7 +46,6 @@ const EntryCard = ({
             updateDictionary({ ...currentDictionary, validated: false, numErrors: 0 });
             clearEntryErrorFlags(currentDictionary.entryIds);
         }
-        console.log('blur');
     };
 
     const handleDelete = evt => {
@@ -61,23 +56,9 @@ const EntryCard = ({
 
     const handleKeyPress = evt => {
         // update redux state when enter pressed while input was in focus
-        console.log(evt.key);
-        // TODO test if blur and keypress evts work on mobile as intended
         if (evt.key === 'Enter') {
             evt.target.blur();
         }
-    };
-
-    const chooseErrorClassName = entry => {
-        // const errStr = entry.errors.join('');
-        // if (errStr.includes('duplicate')) {
-        //     return styles.warning;
-        // } else if (errStr.includes('fork') || errStr.includes('cycle') || errStr.includes('chain')) {
-        //     return styles.error;
-        // } else {
-        //     return styles.hidden;
-        // }
-        return styles.hidden;
     };
 
     return (
@@ -87,21 +68,19 @@ const EntryCard = ({
                     <input
                         type='text'
                         name='domain'
-                        className={`${styles.entryInput} ${chooseErrorClassName(entry)}`}
+                        className={styles.entryInput}
                         defaultValue={entry.domain}
                         onKeyPress={handleKeyPress}
                         onChange={handleChange}
-                        onFocus={handleFocus}
                         onBlur={handleBlur}
                     />
                     <input
                         type='text'
                         name='range'
-                        className={`${styles.entryInput} ${chooseErrorClassName(entry)}`}
+                        className={styles.entryInput}
                         defaultValue={entry.range}
                         onKeyPress={handleKeyPress}
                         onChange={handleChange}
-                        onFocus={handleFocus}
                         onBlur={handleBlur}
                     />
                     <div className={styles.flags}>

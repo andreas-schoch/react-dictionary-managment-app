@@ -1,5 +1,6 @@
 .mainFooter {
-    margin-top: auto;
+    margin-bottom: -17px; // TODO find out what causes Footer to have this weird gap from the bottom
+    margin-top: 2rem;
     width: 100%;
     text-align: center;
     color: rgb(126, 126, 126);

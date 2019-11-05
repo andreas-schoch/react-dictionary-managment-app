@@ -10,7 +10,6 @@ const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, upda
         const entryErrorTable = {};
 
         // TODO consider refactoring the validation helpers. Right now some part is here and another part is somewhere else
-        // (what caused the seperation initially was the idea to add a "validate all dicts" button in another component)
         // duplicates
         findDuplicates(entries).forEach(id => {
             if (!entryErrorTable[id]) {

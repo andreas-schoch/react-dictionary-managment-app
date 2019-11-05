@@ -19,7 +19,6 @@ ReactDOM.render(
                 </App>
             </Switch>
         </Router>
-        ,
     </Provider>,
     document.getElementById('root')
 );

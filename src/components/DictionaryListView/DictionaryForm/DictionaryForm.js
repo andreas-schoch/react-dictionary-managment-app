@@ -13,13 +13,11 @@ const DictionaryForm = ({ dictionaries, addDictionary }) => {
             setInputValue(evt.target.value);
         } else {
             setError('Dictionary name cannot have more than 20 characters'); // TODO display error to user
-            console.log(error);
         }
     };
 
     const handleSubmit = evt => {
         evt.preventDefault();
-        console.log('submit');
         if (isFormValid()) {
             const now = Date.now();
             const newDict = {
