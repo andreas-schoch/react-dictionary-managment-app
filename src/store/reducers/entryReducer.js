@@ -31,15 +31,13 @@ export const entryReducer = (entries = persistedState, action) => {
         }
 
         case actionTypes.CLEAR_ENTRY_ERROR_FLAGS: {
-            let { entryId, flags } = action.payload;
-            const entry = { ...entries[entryId], ...flags };
-            return { ...entries, [entry.id]: entry };
+            let entryIds = action.payload.entryIds;
+            let clearedEntries = {};
+            entryIds.forEach(id => {
+                clearedEntries[id] = { ...entries[id], duplicate: false, fork: false, cycle: false, chain: false };
+            });
+            return { ...entries, ...clearedEntries };
         }
-
-        // case actionTypes.CLEAR_ENTRY_ERRORS: {
-        //     const entry = { ...action.payload.clearedEntry, errors: [], severity: 0 };
-        //     return { ...entries, [entry.id]: entry };
-        // }
 
         default:
             return entries;

@@ -12,7 +12,7 @@ const initial = {
         id: id1,
         created: timestamp - 3,
         edited: timestamp - 3,
-        errors: [],
+        numErrors: 0,
         validated: false,
         entryIds: []
     },
@@ -21,7 +21,7 @@ const initial = {
         id: id2,
         created: timestamp - 2,
         edited: timestamp - 2,
-        errors: [],
+        numErrors: 0,
         validated: false,
         entryIds: []
     },
@@ -30,7 +30,7 @@ const initial = {
         id: id3,
         created: timestamp - 1,
         edited: timestamp - 1,
-        errors: [],
+        numErrors: 0,
         validated: false,
         entryIds: []
     }
@@ -66,10 +66,8 @@ export const dictionaryReducer = (dictionaries = persistedState, action) => {
             const { entryId, dictId } = action.payload;
             const edited = Date.now();
             const entryIds = [...dictionaries[dictId].entryIds];
-
             const index = entryIds.indexOf(entryId);
             entryIds.splice(index, 1);
-
             return { ...dictionaries, [dictId]: { ...dictionaries[dictId], edited, entryIds } };
         }
         default:

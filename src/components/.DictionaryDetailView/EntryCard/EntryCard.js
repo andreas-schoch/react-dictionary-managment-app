@@ -3,7 +3,13 @@ import styles from './EntryCard.module.scss';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import GenericCard from '../../GenericCard/GenericCard';
-import { updateEntry, updateDictionary, removeEntryIdFromDictionary, removeEntry } from '../../../store/actions';
+import {
+    updateEntry,
+    updateDictionary,
+    removeEntryIdFromDictionary,
+    removeEntry,
+    clearEntryErrorFlags
+} from '../../../store/actions';
 
 const EntryCard = ({
     entry,
@@ -11,7 +17,8 @@ const EntryCard = ({
     currentDictionary,
     updateDictionary,
     removeEntryIdFromDictionary,
-    removeEntry
+    removeEntry,
+    clearEntryErrorFlags
 }) => {
     const [entryModified, setEntryModified] = useState(false); // true if data different from redux state
     const { domain, range, entryId, duplicate, fork, chain, cycle } = entry;
@@ -40,7 +47,8 @@ const EntryCard = ({
         if (entryModified) {
             const edited = Date.now();
             updateEntry({ ...entry, edited, [evt.target.name]: evt.target.value });
-            updateDictionary({ ...currentDictionary, edited });
+            updateDictionary({ ...currentDictionary, validated: false, numErrors: 0 });
+            clearEntryErrorFlags(currentDictionary.entryIds);
         }
         console.log('blur');
     };
@@ -131,6 +139,6 @@ const mapStateToProps = (state, ownProps) => ({
 export default withRouter(
     connect(
         mapStateToProps,
-        { updateEntry, updateDictionary, removeEntryIdFromDictionary, removeEntry }
+        { updateEntry, updateDictionary, removeEntryIdFromDictionary, removeEntry, clearEntryErrorFlags }
     )(EntryCard)
 );

@@ -3,9 +3,9 @@ import { Link, withRouter } from 'react-router-dom';
 import styles from './DetailViewHeader.module.scss';
 import { connect } from 'react-redux';
 import { objToArrOrdered, findDuplicates, findForks, findCycles, findChains } from '../../../helpers';
-import { setEntryErrorFlags } from '../../../store/actions';
+import { setEntryErrorFlags, updateDictionary } from '../../../store/actions';
 
-const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags }) => {
+const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, updateDictionary }) => {
     const handleValidation = evt => {
         const entryErrorTable = {};
 
@@ -44,9 +44,20 @@ const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags }) =>
         });
 
         // dispatch action  to set the  error flags of all entries
-        Object.entries(entryErrorTable).forEach(([entryId, flags]) => {
-            setEntryErrorFlags(entryId, flags);
-        });
+        const objEntries = Object.entries(entryErrorTable);
+
+        // set the validated property of the dictionary to true of no errors found
+        if (objEntries.length === 0 && entryErrorTable.constructor === Object) {
+            console.log('NO ERRORS FOUND');
+            const updatedDict = { ...currentDictionary, validated: true, numErrors: 0 };
+            updateDictionary(updatedDict);
+        } else {
+            console.log('TABLE', entryErrorTable);
+            const updatedDict = { ...currentDictionary, validated: false, numErrors: objEntries.length };
+            objEntries.forEach(([entryId, flags]) => {
+                setEntryErrorFlags(entryId, flags);
+            });
+        }
     };
 
     return (
@@ -76,6 +87,6 @@ const mapStateToProps = (state, ownProps) => {
 export default withRouter(
     connect(
         mapStateToProps,
-        { setEntryErrorFlags }
+        { setEntryErrorFlags, updateDictionary }
     )(DetailViewHeader)
 );

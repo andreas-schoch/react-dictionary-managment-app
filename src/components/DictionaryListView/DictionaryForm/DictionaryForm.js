@@ -28,7 +28,7 @@ const DictionaryForm = ({ dictionaries, addDictionary }) => {
                 created: now,
                 edited: now,
                 validated: false,
-                errors: [],
+                numErrors: 0,
                 entryIds: []
             };
 
