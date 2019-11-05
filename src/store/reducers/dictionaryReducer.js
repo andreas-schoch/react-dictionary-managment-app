@@ -60,7 +60,10 @@ export const dictionaryReducer = (dictionaries = persistedState, action) => {
             const { entryId, dictId } = action.payload;
             const edited = Date.now();
             const entryIds = dictionaries[dictId].entryIds.concat(entryId);
-            return { ...dictionaries, [dictId]: { ...dictionaries[dictId], edited, entryIds } };
+            return {
+                ...dictionaries,
+                [dictId]: { ...dictionaries[dictId], edited, entryIds, validated: false, numErrors: 0 }
+            };
         }
         case actionTypes.REMOVE_ENTRY_ID_FROM_DICTIONARY: {
             const { entryId, dictId } = action.payload;

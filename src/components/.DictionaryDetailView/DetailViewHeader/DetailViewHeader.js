@@ -46,17 +46,28 @@ const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, upda
         // dispatch action  to set the  error flags of all entries
         const objEntries = Object.entries(entryErrorTable);
 
-        // set the validated property of the dictionary to true of no errors found
+        // set the dictionary.validated to true of no errors found
         if (objEntries.length === 0 && entryErrorTable.constructor === Object) {
-            console.log('NO ERRORS FOUND');
-            const updatedDict = { ...currentDictionary, validated: true, numErrors: 0 };
-            updateDictionary(updatedDict);
+            updateDictionary({ ...currentDictionary, validated: true, numErrors: 0 });
         } else {
-            console.log('TABLE', entryErrorTable);
-            const updatedDict = { ...currentDictionary, validated: false, numErrors: objEntries.length };
+            updateDictionary({ ...currentDictionary, validated: false, numErrors: objEntries.length });
+
             objEntries.forEach(([entryId, flags]) => {
                 setEntryErrorFlags(entryId, flags);
             });
+        }
+    };
+
+    // 1: dict is validated 2: not validated yet 3:  errors found
+    const renderValidateButton = dict => {
+        if (dict.validated) {
+            return <button className={`${styles.btnValidate} ${styles.valid}`}>Validated</button>;
+        } else {
+            return (
+                <button className={styles.btnValidate} onClick={handleValidation}>
+                    Click to Validate
+                </button>
+            );
         }
     };
 
@@ -68,9 +79,7 @@ const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, upda
             </Link>
 
             <h1 className={styles.dictName}>{currentDictionary ? currentDictionary.name : ''}</h1>
-            <button className={styles.btnValidate} onClick={handleValidation}>
-                Validate
-            </button>
+            {renderValidateButton(currentDictionary)}
         </header>
     );
 };
