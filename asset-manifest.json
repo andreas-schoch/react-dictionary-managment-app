@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/react-dictionarymanagement-app/static/css/main.95e14b21.chunk.css",
-    "main.js": "/react-dictionarymanagement-app/static/js/main.610c16a3.chunk.js",
-    "main.js.map": "/react-dictionarymanagement-app/static/js/main.610c16a3.chunk.js.map",
-    "runtime-main.js": "/react-dictionarymanagement-app/static/js/runtime-main.d151166d.js",
-    "runtime-main.js.map": "/react-dictionarymanagement-app/static/js/runtime-main.d151166d.js.map",
-    "static/js/2.b8173159.chunk.js": "/react-dictionarymanagement-app/static/js/2.b8173159.chunk.js",
-    "static/js/2.b8173159.chunk.js.map": "/react-dictionarymanagement-app/static/js/2.b8173159.chunk.js.map",
-    "index.html": "/react-dictionarymanagement-app/index.html",
-    "precache-manifest.b287ee7d90b22115961601aab8e72572.js": "/react-dictionarymanagement-app/precache-manifest.b287ee7d90b22115961601aab8e72572.js",
-    "service-worker.js": "/react-dictionarymanagement-app/service-worker.js",
-    "static/css/main.95e14b21.chunk.css.map": "/react-dictionarymanagement-app/static/css/main.95e14b21.chunk.css.map"
+    "main.css": "/react-dictionary-managment-app/static/css/main.95e14b21.chunk.css",
+    "main.js": "/react-dictionary-managment-app/static/js/main.c2322c3c.chunk.js",
+    "main.js.map": "/react-dictionary-managment-app/static/js/main.c2322c3c.chunk.js.map",
+    "runtime-main.js": "/react-dictionary-managment-app/static/js/runtime-main.dd4b44f5.js",
+    "runtime-main.js.map": "/react-dictionary-managment-app/static/js/runtime-main.dd4b44f5.js.map",
+    "static/js/2.b8173159.chunk.js": "/react-dictionary-managment-app/static/js/2.b8173159.chunk.js",
+    "static/js/2.b8173159.chunk.js.map": "/react-dictionary-managment-app/static/js/2.b8173159.chunk.js.map",
+    "index.html": "/react-dictionary-managment-app/index.html",
+    "precache-manifest.fbc43b199ad032b481ce76828302b4f7.js": "/react-dictionary-managment-app/precache-manifest.fbc43b199ad032b481ce76828302b4f7.js",
+    "service-worker.js": "/react-dictionary-managment-app/service-worker.js",
+    "static/css/main.95e14b21.chunk.css.map": "/react-dictionary-managment-app/static/css/main.95e14b21.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.d151166d.js",
+    "static/js/runtime-main.dd4b44f5.js",
     "static/js/2.b8173159.chunk.js",
     "static/css/main.95e14b21.chunk.css",
-    "static/js/main.610c16a3.chunk.js"
+    "static/js/main.c2322c3c.chunk.js"
   ]
 }
