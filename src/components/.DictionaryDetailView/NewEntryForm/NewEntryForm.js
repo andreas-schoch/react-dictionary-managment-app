@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import styles from './NewEntryForm.module.scss';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
-import { addEntry, addEntryReferenceToDictionary } from '../../../store/actions/index';
+import { addEntry, addEntryIdToDictionary } from '../../../store/actions/index';
 import uuid from 'uuid';
 
-const NewEntryForm = ({ currentDictionary, addEntry, addEntryReferenceToDictionary }) => {
+const NewEntryForm = ({ currentDictionary, addEntry, addEntryIdToDictionary }) => {
     const [state, setState] = useState({
         domain: '',
         range: '',
@@ -15,15 +14,7 @@ const NewEntryForm = ({ currentDictionary, addEntry, addEntryReferenceToDictiona
 
     const [error, setError] = useState([]);
 
-    const handleChange = evt => {
-        if (evt.target.value.length <= 20) {
-            console.log(state);
-            setState({ ...state, [evt.target.name]: evt.target.value });
-        } else {
-            setState({ error: 'Domain and Range cannot have more than 20 characters each' }); // TODO display error to user
-            console.log(error);
-        }
-    };
+    const handleChange = evt => setState({ ...state, [evt.target.name]: evt.target.value });
 
     const handleSubmit = evt => {
         evt.preventDefault();
@@ -35,14 +26,15 @@ const NewEntryForm = ({ currentDictionary, addEntry, addEntryReferenceToDictiona
                 id: uuid(),
                 created: now,
                 edited: now,
-                errorSeverity: 0,
-                errors: []
+                duplicate: false,
+                fork: false,
+                chain: false,
+                cycle: false
             };
 
             addEntry(newEntry);
-            addEntryReferenceToDictionary(newEntry.id, currentDictionary.id);
-            setState({ domain: '', range: '', error: '' });
-            console.log('submit');
+            addEntryIdToDictionary(newEntry.id, currentDictionary.id);
+            setState({ domain: '', range: '' });
         }
     };
 
@@ -50,9 +42,25 @@ const NewEntryForm = ({ currentDictionary, addEntry, addEntryReferenceToDictiona
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <input type='text' value={state.domain} placeholder='Domain' onChange={handleChange} name='domain' className={styles.input} />
+            <input
+                type='text'
+                maxLength={20}
+                value={state.domain}
+                placeholder='Domain'
+                onChange={handleChange}
+                name='domain'
+                className={styles.input}
+            />
 
-            <input type='text' value={state.range} placeholder='Range' onChange={handleChange} name='range' className={styles.input} />
+            <input
+                type='text'
+                maxLength={20}
+                value={state.range}
+                placeholder='Range'
+                onChange={handleChange}
+                name='range'
+                className={styles.input}
+            />
             <button type='submit'>
                 <span> Add</span>
             </button>
@@ -70,8 +78,6 @@ const mapStateToProps = (state, ownProps) => {
 export default withRouter(
     connect(
         mapStateToProps,
-        { addEntry, addEntryReferenceToDictionary }
+        { addEntry, addEntryIdToDictionary }
     )(NewEntryForm)
 );
-
-// export default withRouter(connect(mapStateToProps)(NewEntryForm));

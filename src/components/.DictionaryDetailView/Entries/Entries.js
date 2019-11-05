@@ -8,9 +8,11 @@ import EntryCard from '../EntryCard/EntryCard';
 const Entries = ({ entries }) => {
     return (
         <div className={styles.container}>
-            {entries.map(entry => (
-                <EntryCard key={entry.id} entry={entry} />
-            ))}
+            {entries.length ? (
+                entries.map(entry => <EntryCard key={entry.id} entry={entry} />)
+            ) : (
+                <span>empty dictionary</span>
+            )}
         </div>
     );
 };
