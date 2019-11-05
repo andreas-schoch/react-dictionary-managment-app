@@ -6,15 +6,8 @@ import uuid from 'uuid';
 
 const DictionaryForm = ({ dictionaries, addDictionary }) => {
     const [inputValue, setInputValue] = useState('');
-    const [error, setError] = useState([]);
 
-    const handleChange = evt => {
-        if (evt.target.value.length <= 20) {
-            setInputValue(evt.target.value);
-        } else {
-            setError('Dictionary name cannot have more than 20 characters'); // TODO display error to user
-        }
-    };
+    const handleChange = evt => setInputValue(evt.target.value);
 
     const handleSubmit = evt => {
         evt.preventDefault();
@@ -40,6 +33,7 @@ const DictionaryForm = ({ dictionaries, addDictionary }) => {
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <input
+                maxLength={20}
                 type='text'
                 value={inputValue}
                 placeholder='new Dictionary Name'

@@ -44,12 +44,13 @@ const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, upda
 
         // dispatch action  to set the  error flags of all entries
         const objEntries = Object.entries(entryErrorTable);
+        const edited = Date.now();
 
         // set the dictionary.validated to true of no errors found
         if (objEntries.length === 0 && entryErrorTable.constructor === Object) {
-            updateDictionary({ ...currentDictionary, validated: true, numErrors: 0 });
+            updateDictionary({ ...currentDictionary, validated: true, numErrors: 0, edited });
         } else {
-            updateDictionary({ ...currentDictionary, validated: false, numErrors: objEntries.length });
+            updateDictionary({ ...currentDictionary, validated: false, numErrors: objEntries.length, edited });
 
             objEntries.forEach(([entryId, flags]) => {
                 setEntryErrorFlags(entryId, flags);
@@ -64,7 +65,7 @@ const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, upda
         } else {
             return (
                 <button className={styles.btnValidate} onClick={handleValidation}>
-                    Click to Validate
+                    Validate
                 </button>
             );
         }

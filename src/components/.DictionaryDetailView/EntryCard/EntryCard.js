@@ -36,14 +36,12 @@ const EntryCard = ({
         }
     };
 
-    // const handleFocus = evt => {};
-
     const handleBlur = evt => {
         // update redux state when input loses focus
         if (entryModified) {
             const edited = Date.now();
             updateEntry({ ...entry, edited, [evt.target.name]: evt.target.value });
-            updateDictionary({ ...currentDictionary, validated: false, numErrors: 0 });
+            updateDictionary({ ...currentDictionary, validated: false, numErrors: 0, edited });
             clearEntryErrorFlags(currentDictionary.entryIds);
         }
     };
