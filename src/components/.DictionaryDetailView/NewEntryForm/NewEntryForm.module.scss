@@ -2,28 +2,38 @@
     width: 100%;
     display: flex;
     margin: 0.75rem 0;
+    flex-flow: row nowrap;
+    align-items: center;
 
     &:hover input,
     & input:focus-within {
         box-shadow: 0 1px 5px 0px #999;
     }
 
-    .input {
+    .inputContainer {
+        display: flex;
+        flex-flow: column nowrap;
         flex-grow: 1;
-        padding: 0.5rem;
-        font-size: 1.25rem;
-        outline: none;
-        border: none;
-        box-shadow: none;
+
+        .input {
+            width: 100%;
+            flex-grow: 1;
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            outline: none;
+            border: none;
+            box-shadow: none;
+        }
     }
 
     button[type='submit'] {
+        height: 100%;
         border-radius: 3px;
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
-        width: 150px;
+        width: 90px;
         border: none;
         background-color: #969696;
-        padding: 0 1rem;
+        padding: 1.25rem 0.5rem;
         color: white;
         font-size: 1.25rem;
         transition: box-shadow 0.15s;
@@ -31,6 +41,29 @@
             cursor: pointer;
             box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12),
                 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+@media (min-width: 800px) {
+    .form {
+        flex-flow: row nowrap;
+
+        &:hover input,
+        & input:focus-within {
+            box-shadow: 0 1px 5px 0px #999;
+        }
+
+        .inputContainer {
+            flex-flow: row nowrap;
+            .input {
+                font-size: 1.25rem;
+            }
+        }
+
+        button[type='submit'] {
+            width: 150px;
+            padding: 0.5rem;
         }
     }
 }

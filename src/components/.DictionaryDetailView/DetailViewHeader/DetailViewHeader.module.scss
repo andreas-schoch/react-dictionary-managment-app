@@ -25,13 +25,11 @@
     }
 
     .btnValidate {
-        margin-right: 2rem;
         margin-left: auto;
-
         background-color: orange;
-        padding: 0.4rem 1rem;
+        padding: 0.25rem 0.5rem;
         border: none;
-        font-size: 1rem;
+        font-size: 0.75rem;
         border-radius: 5px;
         color: white;
         font-weight: bold;
@@ -47,6 +45,13 @@
     }
 
     .dictName {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 800px) {
+    .btnValidate {
+        padding: 0.5rem 1rem !important; // for some reason the media query gets overwritten by rules above without important
+        font-size: 1rem !important;
     }
 }

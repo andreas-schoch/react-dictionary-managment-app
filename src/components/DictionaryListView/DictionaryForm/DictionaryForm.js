@@ -33,6 +33,7 @@ const DictionaryForm = ({ dictionaries, addDictionary }) => {
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <input
+                aria-label={'new dictionary name'}
                 maxLength={20}
                 type='text'
                 value={inputValue}

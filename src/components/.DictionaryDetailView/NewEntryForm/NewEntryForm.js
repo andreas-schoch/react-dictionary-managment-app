@@ -42,25 +42,27 @@ const NewEntryForm = ({ currentDictionary, addEntry, addEntryIdToDictionary }) =
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <input
-                type='text'
-                maxLength={20}
-                value={state.domain}
-                placeholder='Domain'
-                onChange={handleChange}
-                name='domain'
-                className={styles.input}
-            />
+            <span className={styles.inputContainer}>
+                <input
+                    type='text'
+                    maxLength={20}
+                    value={state.domain}
+                    placeholder='Domain'
+                    onChange={handleChange}
+                    name='domain'
+                    className={styles.input}
+                />
 
-            <input
-                type='text'
-                maxLength={20}
-                value={state.range}
-                placeholder='Range'
-                onChange={handleChange}
-                name='range'
-                className={styles.input}
-            />
+                <input
+                    type='text'
+                    maxLength={20}
+                    value={state.range}
+                    placeholder='Range'
+                    onChange={handleChange}
+                    name='range'
+                    className={styles.input}
+                />
+            </span>
             <button type='submit'>
                 <span> Add</span>
             </button>

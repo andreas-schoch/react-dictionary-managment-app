@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     margin: 0.75rem 0;
+    font-size: 1.25rem;
 
     &:hover input,
     & input:focus-within {
@@ -31,5 +32,11 @@
             box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.12),
                 0 1px 8px 0 rgba(0, 0, 0, 0.2);
         }
+    }
+}
+
+@media (min-width: 800px) {
+    .nameInput {
+        font-size: 1.25rem;
     }
 }
