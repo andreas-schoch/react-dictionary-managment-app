@@ -71,7 +71,10 @@ export const dictionaryReducer = (dictionaries = persistedState, action) => {
             const entryIds = [...dictionaries[dictId].entryIds];
             const index = entryIds.indexOf(entryId);
             entryIds.splice(index, 1);
-            return { ...dictionaries, [dictId]: { ...dictionaries[dictId], edited, entryIds } };
+            return {
+                ...dictionaries,
+                [dictId]: { ...dictionaries[dictId], edited, entryIds, validated: false, numErrors: 0 }
+            };
         }
         default:
             return dictionaries;

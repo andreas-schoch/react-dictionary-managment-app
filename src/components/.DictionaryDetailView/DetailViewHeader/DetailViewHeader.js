@@ -1,66 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styles from './DetailViewHeader.module.scss';
 import { connect } from 'react-redux';
-import { objToArrOrdered, findDuplicates, findForks, findCycles, findChains } from '../../../helpers';
-import { setEntryErrorFlags, updateDictionary } from '../../../store/actions';
+import { objToArrOrdered, getEntryErrorTable } from '../../../helpers';
+import { setEntryErrorFlags, updateDictionary, showNotification } from '../../../store/actions';
 
-const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, updateDictionary }) => {
+const DetailViewHeader = ({ currentDictionary, entries, setEntryErrorFlags, updateDictionary, showNotification }) => {
     const handleValidation = evt => {
-        const entryErrorTable = {};
+        const entryErrorTable = getEntryErrorTable(entries);
 
-        // TODO consider refactoring the validation helpers. Right now some part is here and another part is somewhere else
-        // duplicates
-        findDuplicates(entries).forEach(id => {
-            if (!entryErrorTable[id]) {
-                entryErrorTable[id] = {};
-            }
-            entryErrorTable[id].duplicate = true;
-        });
-
-        // forks
-        findForks(entries).forEach(id => {
-            if (!entryErrorTable[id]) {
-                entryErrorTable[id] = {};
-            }
-            entryErrorTable[id].fork = true;
-        });
-
-        // cycles
-        findCycles(entries).forEach(id => {
-            if (!entryErrorTable[id]) {
-                entryErrorTable[id] = {};
-            }
-            entryErrorTable[id].cycle = true;
-        });
-
-        // chains
-        findChains(entries).forEach(id => {
-            if (!entryErrorTable[id]) {
-                entryErrorTable[id] = {};
-            }
-            entryErrorTable[id].chain = true;
-        });
-
-        // dispatch action  to set the  error flags of all entries
         const objEntries = Object.entries(entryErrorTable);
         const edited = Date.now();
 
-        // set the dictionary.validated to true of no errors found
         if (objEntries.length === 0 && entryErrorTable.constructor === Object) {
+            // no errors found, set dictionary.validated to true
             updateDictionary({ ...currentDictionary, validated: true, numErrors: 0, edited });
         } else {
+            // dispatch actions to set the  error flags of all entries
+            showNotification('errors found');
             updateDictionary({ ...currentDictionary, validated: false, numErrors: objEntries.length, edited });
-
             objEntries.forEach(([entryId, flags]) => {
                 setEntryErrorFlags(entryId, flags);
             });
         }
     };
 
-    // 1: dict is validated 2: not validated yet 3:  errors found
     const renderValidateButton = dict => {
-        if (dict.validated) {
+        if (dict && dict.validated) {
             return <button className={`${styles.btnValidate} ${styles.valid}`}>Validated</button>;
         } else {
             return (
@@ -96,6 +62,6 @@ const mapStateToProps = (state, ownProps) => {
 export default withRouter(
     connect(
         mapStateToProps,
-        { setEntryErrorFlags, updateDictionary }
+        { setEntryErrorFlags, updateDictionary, showNotification }
     )(DetailViewHeader)
 );

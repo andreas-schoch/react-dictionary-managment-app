@@ -3,27 +3,44 @@
     display: flex;
     margin: 0.75rem 0;
     font-size: 1.25rem;
+    box-shadow: none;
+    transition: box-shadow 0.2s;
 
     &:hover input,
     & input:focus-within {
         box-shadow: 0 1px 5px 0px #999;
+        transition: box-shadow 0.2s;
     }
     .nameInput {
         flex-grow: 1;
         padding: 0.5rem;
         font-size: 1.25rem;
         outline: none;
-        border: none;
+        border: 1px solid #dcdcdc;
         box-shadow: none;
+        border-radius: 3px;
+        transition: border 0.2s box-shadow 0.2s;
+
+        &:focus,
+        &:focus-within {
+            border: 1px solid #999;
+            box-shadow: 0 1px 5px 0px #999;
+        }
+
+        &:hover {
+            box-shadow: 0 1px 5px 0px #999;
+        }
     }
 
     button[type='submit'] {
-        border-radius: 3px;
+        $border-radius: 3px;
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
         width: 150px;
         border: none;
         background-color: #969696;
         padding: 0 1rem;
+        margin-left: 3px;
+        border-radius: 3px;
         color: white;
         font-size: 1.25rem;
         transition: box-shadow 0.15s;

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './NewEntryForm.module.scss';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { addEntry, addEntryIdToDictionary } from '../../../store/actions/index';
+import { addEntry, addEntryIdToDictionary, clearEntryErrorFlags } from '../../../store/actions/index';
 import uuid from 'uuid';
 
-const NewEntryForm = ({ currentDictionary, addEntry, addEntryIdToDictionary }) => {
+const NewEntryForm = ({ currentDictionary, addEntry, addEntryIdToDictionary, clearEntryErrorFlags }) => {
     const [state, setState] = useState({
         domain: '',
         range: '',
         error: ''
     });
 
-    const [error, setError] = useState([]);
+    const domainInputRef = useRef(null); // used to change focus to domain input after adding an entry
 
     const handleChange = evt => setState({ ...state, [evt.target.name]: evt.target.value });
 
@@ -34,7 +34,11 @@ const NewEntryForm = ({ currentDictionary, addEntry, addEntryIdToDictionary }) =
 
             addEntry(newEntry);
             addEntryIdToDictionary(newEntry.id, currentDictionary.id);
+            clearEntryErrorFlags(currentDictionary.entryIds);
             setState({ domain: '', range: '' });
+
+            // change focus back to domain input
+            domainInputRef.current.focus();
         }
     };
 
@@ -51,6 +55,7 @@ const NewEntryForm = ({ currentDictionary, addEntry, addEntryIdToDictionary }) =
                     onChange={handleChange}
                     name='domain'
                     className={styles.input}
+                    ref={domainInputRef}
                 />
 
                 <input
@@ -80,6 +85,6 @@ const mapStateToProps = (state, ownProps) => {
 export default withRouter(
     connect(
         mapStateToProps,
-        { addEntry, addEntryIdToDictionary }
+        { addEntry, addEntryIdToDictionary, clearEntryErrorFlags }
     )(NewEntryForm)
 );

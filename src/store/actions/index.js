@@ -51,3 +51,12 @@ export const removeEntryIdFromDictionary = (entryId, dictId) => ({
     type: actionTypes.REMOVE_ENTRY_ID_FROM_DICTIONARY,
     payload: { entryId, dictId }
 });
+
+export const showNotification = message => ({
+    type: actionTypes.SHOW_NOTIFICATION,
+    payload: { message }
+});
+
+export const hideNotification = () => ({
+    type: actionTypes.HIDE_NOTIFICATION
+});

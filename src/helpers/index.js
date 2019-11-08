@@ -50,54 +50,150 @@ export const objToObjOrdered = (hashtable, keys) => {
     return partialHashtable;
 };
 
-// modifies entry domain/range pair for the comparison
-const getSanitizedPair = (domain, range) => [domain.trim().toLowerCase(), range.trim().toLowerCase()];
+/**
+ * utility that trims whitespace and makes string all lowercase for easier comparison
+ * @param {string} string string to be cleaned
+ * @return {string} cleaned string
+ */
+const clean = string => string.trim().toLowerCase();
 
-// TODO try to combine all 4 helper functions in single iteration, if performance ever becomes an issue here
+/**
+ * utility to trims whitespace and sets domain and range to lowercase for easier comparison
+ * @param {object} entry a dict entry object with domain and range properties
+ * @returns {array} an Array with cleaned [domain, range]
+ */
+const getSanitizedPair = ({ domain, range }) => [clean(domain), clean(range)];
+
 // Duplicates. Duplicate Domain - Range pairs: Two rows in the dictionary map to the same value
-export const findDuplicates = entries => {
-    const uniqueSet = new Set();
+const findDuplicates = entries => {
     const duplicateIds = [];
 
-    entries.forEach((entry, i) => {
-        const [domain, range] = getSanitizedPair(entry.domain, entry.range);
-        uniqueSet.has(domain + range) ? duplicateIds.push(entry.id) : uniqueSet.add(domain + range);
+    entries.forEach(entry1 => {
+        const [domain1, range1] = getSanitizedPair(entry1);
+
+        const foundDuplicate = entries.some(entry2 => {
+            const [domain2, range2] = getSanitizedPair(entry2);
+            return entry1.id !== entry2.id && domain1 === domain2 && range1 === range2;
+        });
+
+        if (foundDuplicate) {
+            duplicateIds.push(entry1.id);
+        }
     });
     return duplicateIds;
 };
 
 // Forks. Duplicate Domains with different Ranges: Two rows in the dictionary map to different values
-export const findForks = entries => {
-    const uniqueSet = new Set();
+const findForks = entries => {
     const forkedIds = [];
 
-    entries.forEach(entry => {
-        const [domain] = getSanitizedPair(entry.domain, entry.range);
-        uniqueSet.has(domain) ? forkedIds.push(entry.id) : uniqueSet.add(domain);
+    entries.forEach(entry1 => {
+        const [domain1, range1] = getSanitizedPair(entry1);
+
+        const foundFork = entries.some(entry2 => {
+            const [domain2, range2] = getSanitizedPair(entry2);
+            return entry1.id !== entry2.id && domain1 === domain2 && range1 !== range2;
+        });
+
+        if (foundFork) {
+            forkedIds.push(entry1.id);
+        }
     });
     return forkedIds;
 };
 
 // Cycles. Two or more rows in a dictionary result in cycles, resulting in a never-ending transformation
-export const findCycles = entries => {
-    const uniqueSet = new Set();
-    const cycledIds = [];
+// It seems to work most of the time, sometime it doesn't mark all the entries that are part of the cycle only last one
+const findCycle = (entriesHashed, initialId, currentId, depth, maxDepth) => {
+    const currentRange = currentId ? entriesHashed[currentId].range : null;
 
-    entries.forEach(entry => {
-        const [domain, range] = getSanitizedPair(entry.domain, entry.range);
-        uniqueSet.has(domain + range) ? cycledIds.push(entry.id) : uniqueSet.add(range + domain);
+    if (currentRange === entriesHashed[initialId].domain) {
+        // cycle was found
+        return true;
+    } else if (currentRange === undefined || depth >= maxDepth) {
+        // no cycle was found
+        return false;
+    } else {
+        // going deeper
+        const ids = Object.keys(entriesHashed);
+        const newCurrentId = ids.find(id => currentId !== id && entriesHashed[id].domain === currentRange);
+        return findCycle(entriesHashed, initialId, newCurrentId, depth + 1, maxDepth);
+    }
+};
+
+const findCycles = entries => {
+    const cycleIds = [];
+    const entryIds = entries.map(entry => entry.id);
+    const entriesHashed = entries.reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {});
+
+    entryIds.forEach(id => {
+        if (findCycle(entriesHashed, id, id, 1, entries.length)) {
+            cycleIds.push(id);
+        }
     });
-    return cycledIds;
+
+    return cycleIds;
 };
 
 // Chains. A chain structure in the dictionary (a value in Range column also appears in Domain column of another entry)
-export const findChains = entries => {
-    const uniqueSet = new Set();
+const findChains = entries => {
     const chainIds = [];
 
-    entries.forEach(entry => {
-        const [domain, range] = getSanitizedPair(entry.domain, entry.range);
-        uniqueSet.has(range) ? chainIds.push(entry.id) : uniqueSet.add(domain);
-    });
+    // a bit of brute force
+    for (let i = 0; i < entries.length; i++) {
+        const [domain1, range1] = getSanitizedPair(entries[i]);
+        for (let y = 0; y < entries.length; y++) {
+            if (i === y) {
+                continue;
+            }
+            const [domain2, range2] = getSanitizedPair(entries[y]);
+            if ((domain1 === range2 && domain2 !== range1) || (range1 === domain2 && range2 !== domain1)) {
+                chainIds.push(entries[i].id);
+            }
+        }
+    }
     return chainIds;
+};
+
+/**
+ * Helper function that checks all entries for consistency and returns a hashtable with the results
+ * @param {array} entries an array of entries
+ * @returns {object} an object with the entryId as key and a sub-object with properties duplicate, fork, chain and cycle set to true or false
+ */
+export const getEntryErrorTable = entries => {
+    const entryErrorTable = {};
+
+    // duplicates
+    findDuplicates(entries).forEach(id => {
+        if (!entryErrorTable[id]) {
+            entryErrorTable[id] = {};
+        }
+        entryErrorTable[id].duplicate = true;
+    });
+
+    // forks
+    findForks(entries).forEach(id => {
+        if (!entryErrorTable[id]) {
+            entryErrorTable[id] = {};
+        }
+        entryErrorTable[id].fork = true;
+    });
+
+    // cycles
+    findCycles(entries).forEach(id => {
+        if (!entryErrorTable[id]) {
+            entryErrorTable[id] = {};
+        }
+        entryErrorTable[id].cycle = true;
+    });
+
+    // chains
+    findChains(entries).forEach(id => {
+        if (!entryErrorTable[id]) {
+            entryErrorTable[id] = {};
+        }
+        entryErrorTable[id].chain = true;
+    });
+
+    return entryErrorTable;
 };

@@ -12,9 +12,7 @@ const DictionaryListView = ({ dictionaries }) => (
         <Header />
         <ResponsiveContainer center={true}>
             <DictionaryForm />
-            {dictionaries.map(dict => (
-                <DictionaryCard dict={dict} key={dict.id} />
-            ))}
+            {dictionaries && dictionaries.map(dict => <DictionaryCard dict={dict} key={dict.id} />)}
         </ResponsiveContainer>
     </div>
 );
