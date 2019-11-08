@@ -2,7 +2,8 @@
 
 A simple app to manage and validate dictionaries
 
-![Screenshot of Overview](/dictionary-app-1.jpg?raw=true 'Screenshot')
+![Screenshot of Overview](/dictionary-app-1.jpg?raw=true 'Screenshot')  
+  
 ![Screenshot of Detail View](/dictionary-app-2.jpg?raw=true 'Screenshot')
 
 ## Details
