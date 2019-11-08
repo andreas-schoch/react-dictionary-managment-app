@@ -5,7 +5,7 @@ A simple app to manage and validate dictionaries
 ![Screenshot of Overview](/dictionary-app-1.jpg?raw=true 'Screenshot')
 ![Screenshot of Detail View](/dictionary-app-2.jpg?raw=true 'Screenshot')
 
-### Details
+## Details
 
 -   Made with React & Redux
 -   SCSS and CSS Modules
@@ -13,7 +13,7 @@ A simple app to manage and validate dictionaries
 -   State persisted using localStorage
 -   somewhat responsive
 
-#### Functional Requirements
+## Functional Requirements
 
 -   Creating and deleting dictionaries
 -   Showing available dictionaries in an overview
@@ -24,9 +24,11 @@ A simple app to manage and validate dictionaries
     processing such a dictionary).
 -   Persisting dictionaries with validation errors for future editing
 
-### A Dictionary is only Valid when...:
+### A Dictionary is valid if none of the following problems occur:
 
--   ...it has no identical key/Value Pairs.
--   ...it has unique keys.
--   ...there are no loops/cycles where keys and values point to each other
--   ...the value of a member is not a key in another place
+-   **Duplicates**: Duplicate Domain - Range pairs: Two rows in the dictionary map to the same value, simply resulting in duplicate content.
+-   **Forks**: Duplicate Domains with different Ranges: Two rows in the dictionary map to different values, resulting in an ambiguous
+    transformation.
+-   **Cycles**: Two or more rows in a dictionary result in cycles, resulting in a never-ending transformation.
+-   **Chains**: A chain structure in the dictionary (a value in Range column also appears in Domain column of another entry), resulting in
+    inconsistent transformation.
