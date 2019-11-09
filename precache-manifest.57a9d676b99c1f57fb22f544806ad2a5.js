@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4c446448e3217569334fbe8b00c2aa1a",
+    "revision": "dd8d008a3f8450b1742ccda1d45fee0b",
     "url": "/react-dictionary-managment-app/index.html"
   },
   {
-    "revision": "ce3f4bd191d8e0185764",
+    "revision": "fd789cddce1d75a712d2",
     "url": "/react-dictionary-managment-app/static/css/main.d491901b.chunk.css"
   },
   {
-    "revision": "c3b1066053741a1f7e4c",
-    "url": "/react-dictionary-managment-app/static/js/2.375e650d.chunk.js"
+    "revision": "cb76300affdafa893ed4",
+    "url": "/react-dictionary-managment-app/static/js/2.223f269d.chunk.js"
   },
   {
-    "revision": "ce3f4bd191d8e0185764",
-    "url": "/react-dictionary-managment-app/static/js/main.b938a37a.chunk.js"
+    "revision": "fd789cddce1d75a712d2",
+    "url": "/react-dictionary-managment-app/static/js/main.35e57c11.chunk.js"
   },
   {
     "revision": "183f13f58690f7791356",

@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/react-dictionary-managment-app/static/css/main.d491901b.chunk.css",
-    "main.js": "/react-dictionary-managment-app/static/js/main.b938a37a.chunk.js",
-    "main.js.map": "/react-dictionary-managment-app/static/js/main.b938a37a.chunk.js.map",
+    "main.js": "/react-dictionary-managment-app/static/js/main.35e57c11.chunk.js",
+    "main.js.map": "/react-dictionary-managment-app/static/js/main.35e57c11.chunk.js.map",
     "runtime-main.js": "/react-dictionary-managment-app/static/js/runtime-main.dd4b44f5.js",
     "runtime-main.js.map": "/react-dictionary-managment-app/static/js/runtime-main.dd4b44f5.js.map",
-    "static/js/2.375e650d.chunk.js": "/react-dictionary-managment-app/static/js/2.375e650d.chunk.js",
-    "static/js/2.375e650d.chunk.js.map": "/react-dictionary-managment-app/static/js/2.375e650d.chunk.js.map",
+    "static/js/2.223f269d.chunk.js": "/react-dictionary-managment-app/static/js/2.223f269d.chunk.js",
+    "static/js/2.223f269d.chunk.js.map": "/react-dictionary-managment-app/static/js/2.223f269d.chunk.js.map",
     "index.html": "/react-dictionary-managment-app/index.html",
-    "precache-manifest.bab95a465598f1d705cd311eeb291f21.js": "/react-dictionary-managment-app/precache-manifest.bab95a465598f1d705cd311eeb291f21.js",
+    "precache-manifest.57a9d676b99c1f57fb22f544806ad2a5.js": "/react-dictionary-managment-app/precache-manifest.57a9d676b99c1f57fb22f544806ad2a5.js",
     "service-worker.js": "/react-dictionary-managment-app/service-worker.js",
     "static/css/main.d491901b.chunk.css.map": "/react-dictionary-managment-app/static/css/main.d491901b.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.dd4b44f5.js",
-    "static/js/2.375e650d.chunk.js",
+    "static/js/2.223f269d.chunk.js",
     "static/css/main.d491901b.chunk.css",
-    "static/js/main.b938a37a.chunk.js"
+    "static/js/main.35e57c11.chunk.js"
   ]
 }
